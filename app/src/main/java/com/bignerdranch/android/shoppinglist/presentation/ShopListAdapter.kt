@@ -13,16 +13,18 @@ import com.bignerdranch.android.shoppinglist.R
 import com.bignerdranch.android.shoppinglist.domain.ShopItem
 
 
-class ShopListAdapter : androidx.recyclerview.widget.ListAdapter<ShopItem,ShopListAdapter.ShopItemViewHolder>(ShopItemDiffCallback()) {
+class ShopListAdapter :
+    androidx.recyclerview.widget.ListAdapter<ShopItem, ShopListAdapter.ShopItemViewHolder>(
+        ShopItemDiffCallback()
+    ) {
 
 
-    var  onShopItemLongClickListener:((ShopItem) -> Unit)? = null
-    var  onShopItemClickListener:((ShopItem) -> Unit)? = null
+    var onShopItemLongClickListener: ((ShopItem) -> Unit)? = null
+    var onShopItemClickListener: ((ShopItem) -> Unit)? = null
 
     class ShopItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val tvName = view.findViewById<TextView>(R.id.tv_name)
         val tvCount = view.findViewById<TextView>(R.id.tv_count)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
@@ -44,7 +46,7 @@ class ShopListAdapter : androidx.recyclerview.widget.ListAdapter<ShopItem,ShopLi
             true
         }
 
-        holder.view.setOnClickListener{
+        holder.view.setOnClickListener {
             onShopItemClickListener?.invoke(shopItem)
         }
 
@@ -62,7 +64,7 @@ class ShopListAdapter : androidx.recyclerview.widget.ListAdapter<ShopItem,ShopLi
         }
     }
 
-   companion object {
+    companion object {
         const val VIEW_TYPE_ENABLE = 100
         const val VIEW_TYPE_DISABLE = 101
         const val MAX_POOL_SIZE = 7
