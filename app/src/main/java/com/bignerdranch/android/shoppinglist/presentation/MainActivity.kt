@@ -1,6 +1,7 @@
 package com.bignerdranch.android.shoppinglist.presentation
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
@@ -11,7 +12,7 @@ import com.bignerdranch.android.shoppinglist.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var shopListAdapter: ShopListAdapter
@@ -104,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             val intent = ShopItemActivity.newIntentEditItem(this, it.id)
             startActivity(intent) }
             else {
-                launchFragment(ShopItemFragment.newInstanceEditItem(it.id))
+               launchFragment(ShopItemFragment.newInstanceAddItem())
             }
 
         }
@@ -114,6 +115,11 @@ class MainActivity : AppCompatActivity() {
         shopListAdapter.onShopItemLongClickListener = {
             viewModel.changeEnableState(it)
         }
+    }
+
+    override fun onEditingFinished() {
+        Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_SHORT).show()
+        supportFragmentManager.popBackStack()
     }
 
 }

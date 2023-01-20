@@ -16,7 +16,7 @@ import com.bignerdranch.android.shoppinglist.R
 import com.bignerdranch.android.shoppinglist.domain.ShopItem
 import com.google.android.material.textfield.TextInputLayout
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
 
 
     private var screenMode = MODE_UNKNOWN
@@ -80,6 +80,10 @@ class ShopItemActivity : AppCompatActivity() {
             return intent
         }
 
+    }
+
+    override fun onEditingFinished() {
+        finish()
     }
 
 }
